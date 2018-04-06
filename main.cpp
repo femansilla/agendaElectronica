@@ -1,7 +1,7 @@
 //#############################################################################
 // ARCHIVO             : main.cpp
-// AUTOR/ES            : Mansilla Francisco / Albornoz Roberto.
-// VERSION             : 0.01 beta.
+// AUTOR/ES            : Mansilla Francisco
+// VERSION             : 0.02 beta.
 // FECHA DE CREACION   : 31/08/2017.
 // ULTIMA ACTUALIZACION: 18/09/2017.
 // LICENCIA            : GPL (General Public License) - Version 3.

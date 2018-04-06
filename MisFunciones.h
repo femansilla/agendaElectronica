@@ -1,7 +1,7 @@
 //#############################################################################
 // ARCHIVO             : main.cpp
-// AUTOR/ES            : Mansilla Francisco / Albornoz Roberto.
-// VERSION             : 0.01 beta.
+// AUTOR/ES            : Mansilla Francisco
+// VERSION             : 0.02 beta.
 // FECHA DE CREACION   : 31/08/2017.
 // ULTIMA ACTUALIZACION: 18/09/2017.
 // LICENCIA            : GPL (General Public License) - Version 3.
@@ -61,15 +61,12 @@ bool esNumero(char* cadena)//* pasar por puntero porque es una cadena/vector.
 {
     int i = 0;
 
-    bool esNro = false;
-
-    while (cadena[i] != '\0') //'\0' fin de cadena.
+    bool esNro = true;
+    int n = strlen(cadena);
+    while (cadena[i] != '\0' || strlen(cadena) < 1) //'\0' fin de cadena.
     {
-        if(cadena[i] < '1' &&
-                cadena[i] > '9')
-        {
-            esNro = true;
-        }
+        if(cadena[i] < 48 || cadena[i] > 57 || strlen(cadena) < 1)
+            return false;
 
         i++;
     }
@@ -95,8 +92,7 @@ int strToInt (char* cadena)
 
     while (cadena[i] != '\0')
     {
-        if(cadena[i] < '0' ||
-                cadena[i] > '9')
+        if(cadena[i] < 48 || cadena[i] > 57)
             esNumero = false;
 
         i++;
@@ -196,14 +192,14 @@ void cargarTelefono(persona per, telefono *tel)
     cout<< " Ingrese el NUMERO del contacto: ";
     sys::getline(cad_num,20);
     bool esNum = false;
-    while(esNum != true)
+    while(!esNum)
     {
         if(esNumero(cad_num))
         {
             tel->numero = strToInt(cad_num);
             esNum = true;
         }
-        if(esNum != true)
+        if(!esNum)
         {
             cout<< " EL NUMERO QUE INGRESO NO ES VALIDO..."<<endl;
             cout << " INGRESE NUEVAMENTE...";
@@ -358,7 +354,7 @@ void mostrar_contactos()
     {
         while( fread(&per, sizeof(persona), 1, arch_per))
         {
-            if(per.eliminado == false)
+            if(!per.eliminado)
             {
                 cout<< " ==================================="<<endl;
                 cout<< "           ID CONTACTO: "<< per.id_persona << endl;
@@ -375,7 +371,7 @@ void mostrar_contactos()
                 {
                     while(fread(&tel, sizeof(telefono), 1, arch_tel))
                     {
-                        if (tel.eliminado == false)
+                        if (!tel.eliminado)
                         {
                             if(per.id_persona == tel.id_persona)
                             {
@@ -435,7 +431,7 @@ void mostrar_contacto(persona per)
         while(fread(&tel, sizeof(telefono), 1, arch_tel))
         {
             if(per.id_persona == tel.id_persona &&
-                    tel.eliminado == false)
+                    !tel.eliminado)
             {
                 cout<< " -----------------------------------"<<endl;
                 cout<< " ID TELEFONO: "<< tel.id_telefono << endl;
@@ -724,9 +720,9 @@ void editar_telefono(persona per, int id_telefono, int opcion, int nuevo_numero,
             {
                 if( tel.id_persona == per.id_persona &&
                         id_telefono == tel.id_telefono &&
-                        tel.eliminado != false )
+                        tel.eliminado)
                 {
-                    tel.eliminado = true;
+                    tel.eliminado = false; //TODO: revisar
                     cout<< "Telefono Recuperado"<<endl;
                     modificado = true;
                 }
@@ -736,7 +732,7 @@ void editar_telefono(persona per, int id_telefono, int opcion, int nuevo_numero,
             {
                 if( tel.id_persona == per.id_persona &&
                         id_telefono == tel.id_telefono &&
-                        tel.eliminado == false )
+                        !tel.eliminado )
                 {
                     if(opcion == 1)
                     {
@@ -776,7 +772,7 @@ void editar_telefono(persona per, int id_telefono, int opcion, int nuevo_numero,
         }
 
         if(modificado != true)
-            cout<<"El ID de telefono no pertenece a esta contacto o no existe"<<endl;
+            cout<<"El ID de telefono no pertenece a este contacto o no existe"<<endl;
     }
 
 

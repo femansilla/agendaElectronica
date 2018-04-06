@@ -1,7 +1,7 @@
 //#############################################################################
 // ARCHIVO             : main.cpp
-// AUTOR/ES            : Mansilla Francisco / Albornoz Roberto.
-// VERSION             : 0.01 beta.
+// AUTOR/ES            : Mansilla Francisco
+// VERSION             : 0.02 beta.
 // FECHA DE CREACION   : 31/08/2017.
 // ULTIMA ACTUALIZACION: 18/09/2017.
 // LICENCIA            : GPL (General Public License) - Version 3.
@@ -41,7 +41,7 @@ using namespace std;
 
 void presentacion() //funcion de la pantalla de presentacion.
 {
-   sys::cls();
+   //sys::cls();
    cout<<endl;
    cout<<"  #####¶--¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶--¶#####"<<endl;
    cout<<"  #####¶--¶¶¶¶    ¶¶ ¶   ¶ ¶¶¶ ¶ ¶¶¶ ¶    ¶ ¶¶¶ ¶ ¶    ¶¶¶   ¶¶¶¶¶¶--¶#####"<<endl;
@@ -53,10 +53,10 @@ void presentacion() //funcion de la pantalla de presentacion.
    cout<<"  #####¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶#####"<<endl;
    cout<<"  #####¶¶¶¶¶¶¶¶¶¶¶¶¶¶                                   ¶¶¶¶¶¶¶¶¶¶¶¶¶¶#####"<<endl;
    cout<<"  #####¶¶¶¶¶¶¶¶¶¶¶¶¶¶         AGENDA ELECTRONICA        ¶¶¶¶¶¶¶¶¶¶¶¶¶¶#####"<<endl;
-   cout<<"  #####¶¶¶¶¶¶¶¶¶¶¶¶¶¶                2017               ¶¶¶¶¶¶¶¶¶¶¶¶¶¶#####"<<endl;
+   cout<<"  #####¶¶¶¶¶¶¶¶¶¶¶¶¶¶                2018               ¶¶¶¶¶¶¶¶¶¶¶¶¶¶#####"<<endl;
    cout<<"  #####¶¶¶¶¶¶¶¶¶¶¶¶¶¶                                   ¶¶¶¶¶¶¶¶¶¶¶¶¶¶#####"<<endl;
    cout<<"  #####¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶#####"<<endl;
-   cout<<"  #####¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶    AbaperNetSoft   ¶¶¶¶¶¶¶¶¶#####"<<endl;
+   cout<<"  #####¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶      MiSoftCPP     ¶¶¶¶¶¶¶¶¶#####"<<endl;
    cout<<"  #####¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶#####"<<endl;
    cout<<"  #########################################################################"<<endl;
    cout<<endl;
@@ -76,9 +76,9 @@ void despedida()
     cout<<"      #-¶¶¶¶¶¶¶¶¶¶                                      ¶¶¶¶¶¶¶¶¶-#"<<endl;
     cout<<"      #-¶¶¶¶¶¶¶¶¶¶          AGENDA ELECTRONICA          ¶¶¶¶¶¶¶¶¶-#"<<endl;
     cout<<"      #-¶¶¶¶¶¶¶¶¶¶                                      ¶¶¶¶¶¶¶¶¶-#"<<endl;
-    cout<<"      #-¶¶¶¶¶¶¶¶¶¶                 2017                 ¶¶¶¶¶¶¶¶¶-#"<<endl;
+    cout<<"      #-¶¶¶¶¶¶¶¶¶¶                 2018                 ¶¶¶¶¶¶¶¶¶-#"<<endl;
     cout<<"      #-¶¶¶¶¶¶¶¶¶¶                                      ¶¶¶¶¶¶¶¶¶-#"<<endl;
-    cout<<"      #-¶¶¶¶¶¶¶¶¶¶   GRACIAS POR UTILIZAR EL PROGRAMA   ¶¶¶¶¶¶¶¶¶-#"<<endl;
+    cout<<"      #-¶¶¶¶¶¶¶¶¶¶         CERRANDO EL PROGRAMA         ¶¶¶¶¶¶¶¶¶-#"<<endl;
     cout<<"      #-¶¶¶¶¶¶¶¶¶¶                                      ¶¶¶¶¶¶¶¶¶-#"<<endl;
     cout<<"      #-¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶-#"<<endl;
     sys::msleep(1);
@@ -99,7 +99,7 @@ void ayuda()
     cout << " #-----------------------------------------------------------#"<<endl;
     cout << " # Permite ingresar los datos de un contacto                 #" << endl;
     cout << " # como nombre, apellido, direccion                          #" << endl;
-    cout << " # nro de telefono , direccion de E-Mail.                    #" << endl;
+    cout << " # nro de telefono , direccion E-Mail.                       #" << endl;
     cout << " #-=========================================================-#"<<endl<< endl;
     cout << " #-=========================================================-#"<<endl;
     cout << " #                       BUSCAR CONTACTO                     #" << endl;
@@ -112,7 +112,7 @@ void ayuda()
     cout << " #-----------------------------------------------------------#"<<endl;
     cout << " # Tras una busqueda permite modificar datos                 #" << endl;
     cout << " # del contacto ( nombre, apellido, direccion,               #" << endl;
-    cout << " # nro de telefono, direccion de E-Mail) o sus telefonos     #" << endl;
+    cout << " # nro de telefono, direccion E-Mail) o sus telefonos        #" << endl;
     cout << " # (agregar, eliminar, modificar tipo y numeros).            #" << endl;
     cout << " #-=========================================================-#"<<endl<< endl;
     cout << " #-=========================================================-#"<<endl;
@@ -184,7 +184,7 @@ void menu_mod_telefonos()
     cout<< " =================================="<<endl;
     cout<< "|                                  |"<<endl;
     cout<< "|  1) - AGREGAR TELEFONOS          |"<<endl;
-    cout<< "|  2) - ELIMINAR TELEFONOS         |"<<endl;
+    cout<< "|  2) - MODIFICAR TELEFONOS        |"<<endl;
     cout<< "|  3) - RECUPERAR TELEFONO         |"<<endl;
     cout<< "|  0) - VOLVER AL MENU PRINCIPAL   |"<<endl;
     cout<< "|                                  |"<<endl;
