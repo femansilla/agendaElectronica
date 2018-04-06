@@ -1,11 +1,10 @@
 //#############################################################################
 // ARCHIVO             : main.cpp
-// AUTOR/ES            : nombre/s de autor/es
+// AUTOR/ES            : Mansilla Francisco / Albornoz Roberto.
 // VERSION             : 0.01 beta.
 // FECHA DE CREACION   : 31/08/2017.
-// ULTIMA ACTUALIZACION: 31/08/2017.
+// ULTIMA ACTUALIZACION: 18/09/2017.
 // LICENCIA            : GPL (General Public License) - Version 3.
-//
 //****************************************************************************
 #ifndef MENUS_H
 #define MENUS_H
@@ -28,139 +27,225 @@
 // DECLARACION DEL ESPACIO DE NOMBRES POR DEFECTO
 //------------------------------------------------------------------------------
 using namespace std;
-//===========================================================================
-// FUNCION   : void mostrarSubMenu3().
-// ACCION    : Muestra en pantalla el submenu 3.
-// PARAMETROS: NADA.
-// DEVUELVE  : NADA.
-//---------------------------------------------------------------------------
-void mostrarSubMenu3()
+//*****************************************************************************
+//*****************************************************************************
+//*****************************************************************************
+
+
+//======================================================================
+// FUNCION : presentacion ()
+// ACCION : muestra la presentacion.
+// PARAMETROS: -
+// DEVUELVE : -
+//----------------------------------------------------------------------
+
+void presentacion() //funcion de la pantalla de presentacion.
 {
-    cout <<"|-----------------SUBMENU 3-------------------|"<<endl;
-    cout <<"| A-Modificacion                              |"<<endl;
-    cout <<"| B-Volver                                    |"<<endl;
-    cout <<"| C-Salir del programa                        |"<<endl;
-    cout <<"|---------------------------------------------|"<<endl;
+   sys::cls();
+   cout<<endl;
+   cout<<"  #####¶--¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶--¶#####"<<endl;
+   cout<<"  #####¶--¶¶¶¶    ¶¶ ¶   ¶ ¶¶¶ ¶ ¶¶¶ ¶    ¶ ¶¶¶ ¶ ¶    ¶¶¶   ¶¶¶¶¶¶--¶#####"<<endl;
+   cout<<"  #####¶--¶¶¶¶ ¶¶¶ ¶ ¶ ¶¶¶  ¶¶ ¶ ¶¶¶ ¶ ¶¶¶¶  ¶¶ ¶ ¶ ¶¶¶ ¶ ¶¶¶ ¶¶¶¶¶--¶#####"<<endl;
+   cout<<"  #####¶--¶¶¶¶    ¶¶ ¶   ¶ ¶ ¶ ¶ ¶¶¶ ¶    ¶ ¶ ¶ ¶ ¶ ¶¶¶ ¶ ¶¶¶ ¶¶¶¶¶--¶#####"<<endl;
+   cout<<"  #####¶--¶¶¶¶ ¶¶¶ ¶ ¶ ¶¶¶ ¶¶  ¶¶ ¶ ¶¶ ¶¶¶¶ ¶¶  ¶ ¶ ¶¶¶ ¶ ¶¶¶ ¶¶¶¶¶--¶#####"<<endl;
+   cout<<"  #####¶--¶¶¶¶    ¶¶ ¶   ¶ ¶¶¶ ¶¶¶ ¶¶¶    ¶ ¶¶¶ ¶ ¶    ¶¶¶   ¶¶¶¶¶¶--¶#####"<<endl;
+   cout<<"  #####¶--¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶--¶#####"<<endl;
+   cout<<"  #####¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶#####"<<endl;
+   cout<<"  #####¶¶¶¶¶¶¶¶¶¶¶¶¶¶                                   ¶¶¶¶¶¶¶¶¶¶¶¶¶¶#####"<<endl;
+   cout<<"  #####¶¶¶¶¶¶¶¶¶¶¶¶¶¶         AGENDA ELECTRONICA        ¶¶¶¶¶¶¶¶¶¶¶¶¶¶#####"<<endl;
+   cout<<"  #####¶¶¶¶¶¶¶¶¶¶¶¶¶¶                2017               ¶¶¶¶¶¶¶¶¶¶¶¶¶¶#####"<<endl;
+   cout<<"  #####¶¶¶¶¶¶¶¶¶¶¶¶¶¶                                   ¶¶¶¶¶¶¶¶¶¶¶¶¶¶#####"<<endl;
+   cout<<"  #####¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶#####"<<endl;
+   cout<<"  #####¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶    AbaperNetSoft   ¶¶¶¶¶¶¶¶¶#####"<<endl;
+   cout<<"  #####¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶#####"<<endl;
+   cout<<"  #########################################################################"<<endl;
+   cout<<endl;
+   sys::msleep(1);
 }
 
-//===========================================================================
-// FUNCION   : void subMenu3().
-// ACCION    : Inicia el submenu3.
-// PARAMETROS: NADA.
-// DEVUELVE  : Si desea salir del programa o no.
-//---------------------------------------------------------------------------
-bool subMenu3()
+//======================================================================
+// FUNCION   : despedida ()
+// ACCION    : muestra la pantalla de despedida.
+// PARAMETROS: NADA
+// DEVUELVE  : NADA
+//----------------------------------------------------------------------
+void despedida()
 {
-    bool result = false;
-    bool salir= false;//variable que controla el ciclo del menu
-    char opcion;//variable que guarda la opcion seleccionada por el usuario
-    while(!salir)
-    {
-        sys::cls();//Limpio la pantalla
-        mostrarSubMenu3(); //Muestro el menu
-        cout<< "Ingrese una opcion: "; //Solicitio al usuario que ingrese una opcion
-        cin.get(opcion);//Guardo el ingreso del usuario
-        cin.ignore();//Limpio el buffer de teclado
-        switch(opcion)//Evaluo la variable opcion
-        {
-        case 'a':
-        case 'A':
-        {
-            cout <<"La modificaicon se realizo correctamente!!!";
-            cin.get();
-        }
-        break;
-        case 'b':
-        case 'B':
-        {
-            salir=true;
-        }
-        break;
-        case 'c':
-        case 'C':
-        {
-            result= true;//Para salir del programa
-            salir=true;
-        }
-        break;
+    sys::cls();
+    cout<<"\n\n      #-¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶-#"<<endl;
+    cout<<"      #-¶¶¶¶¶¶¶¶¶¶                                      ¶¶¶¶¶¶¶¶¶-#"<<endl;
+    cout<<"      #-¶¶¶¶¶¶¶¶¶¶          AGENDA ELECTRONICA          ¶¶¶¶¶¶¶¶¶-#"<<endl;
+    cout<<"      #-¶¶¶¶¶¶¶¶¶¶                                      ¶¶¶¶¶¶¶¶¶-#"<<endl;
+    cout<<"      #-¶¶¶¶¶¶¶¶¶¶                 2017                 ¶¶¶¶¶¶¶¶¶-#"<<endl;
+    cout<<"      #-¶¶¶¶¶¶¶¶¶¶                                      ¶¶¶¶¶¶¶¶¶-#"<<endl;
+    cout<<"      #-¶¶¶¶¶¶¶¶¶¶   GRACIAS POR UTILIZAR EL PROGRAMA   ¶¶¶¶¶¶¶¶¶-#"<<endl;
+    cout<<"      #-¶¶¶¶¶¶¶¶¶¶                                      ¶¶¶¶¶¶¶¶¶-#"<<endl;
+    cout<<"      #-¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶-#"<<endl;
+    sys::msleep(1);
 
-        default:
-        {
-            cout <<"Opcion no valida!!!";
-            cin.get();
-        }
-        break;
-        }
-
-    }
-    return result;
-}
-//===========================================================================
-// FUNCION   : void mostrarSubMenu2().
-// ACCION    : Muestra en pantalla el submenu 2.
-// PARAMETROS: NADA.
-// DEVUELVE  : NADA.
-//---------------------------------------------------------------------------
-void mostrarSubMenu2()
-{
-    cout <<"|-----------------SUBMENU 2-------------------|"<<endl;
-    cout <<"| A-Alta                                      |"<<endl;
-    cout <<"| B-Volver                                    |"<<endl;
-    cout <<"| C-Salir del programa                        |"<<endl;
-    cout <<"|---------------------------------------------|"<<endl;
 }
 
-//===========================================================================
-// FUNCION   : void subMenu2().
-// ACCION    : Inicia el submenu2.
-// PARAMETROS: NADA.
-// DEVUELVE  : Si desea salir del programa o no.
-//---------------------------------------------------------------------------
-bool subMenu2()
+//======================================================================
+// FUNCION   : void ayuda()
+// ACCION    : es el acceso a la ayuda.
+// PARAMETROS: NADA
+// DEVUELVE  : NADA
+//----------------------------------------------------------------------
+void ayuda()
 {
-    bool result = false;
-    bool salir= false;//variable que controla el ciclo del menu
-    char opcion;//variable que guarda la opcion seleccionada por el usuario
-    while(!salir)
-    {
-        sys::cls();//Limpio la pantalla
-        mostrarSubMenu2(); //Muestro el menu
-        cout<< "Ingrese una opcion: "; //Solicitio al usuario que ingrese una opcion
-        cin.get(opcion);//Guardo el ingreso del usuario
-        cin.ignore();//Limpio el buffer de teclado
-        switch(opcion)//Evaluo la variable opcion
-        {
-        case 'a':
-        case 'A':
-        {
-            cout <<"Se dio de alta!!!";
-            cin.get();
-        }
-        break;
-        case 'b':
-        case 'B':
-        {
-            salir=true;
-        }
-        break;
-        case 'c':
-        case 'C':
-        {
-            result= true;//Para salir del programa
-            salir=true;
-        }
-        break;
+    sys::cls();
+    cout << " #-=========================================================-#"<<endl;
+    cout << " #                      AGREGAR CONTACTO                     #" << endl;
+    cout << " #-----------------------------------------------------------#"<<endl;
+    cout << " # Permite ingresar los datos de un contacto                 #" << endl;
+    cout << " # como nombre, apellido, direccion                          #" << endl;
+    cout << " # nro de telefono , direccion de E-Mail.                    #" << endl;
+    cout << " #-=========================================================-#"<<endl<< endl;
+    cout << " #-=========================================================-#"<<endl;
+    cout << " #                       BUSCAR CONTACTO                     #" << endl;
+    cout << " #-----------------------------------------------------------#"<<endl;
+    cout << " # Permite buscar un contacto                                #"<<endl;
+    cout << " # por nombre, apellido u apodo.                             #" << endl;
+    cout << " #-=========================================================-#"<<endl<< endl;
+    cout << " #-=========================================================-#"<<endl;
+    cout << " #                    MODIFICAR CONTACTO                     #" << endl;
+    cout << " #-----------------------------------------------------------#"<<endl;
+    cout << " # Tras una busqueda permite modificar datos                 #" << endl;
+    cout << " # del contacto ( nombre, apellido, direccion,               #" << endl;
+    cout << " # nro de telefono, direccion de E-Mail) o sus telefonos     #" << endl;
+    cout << " # (agregar, eliminar, modificar tipo y numeros).            #" << endl;
+    cout << " #-=========================================================-#"<<endl<< endl;
+    cout << " #-=========================================================-#"<<endl;
+    cout << " #                     LISTAR CONTACTO                       #" << endl;
+    cout << " #-----------------------------------------------------------#"<<endl;
+    cout << " # muestra todos los contactos con sus respectivos datos.    #" << endl;
+    cout << " # si la lista supera los 5 contactos,                       #" << endl;
+    cout << " # se mostraran en tandas de a 5.                            #" << endl;
+    cout << " #-=========================================================-#"<<endl<< endl;
+    cout << " #-=========================================================-#"<<endl;
+    cout << " #                    ELIMINAR CONTACTO                      #" << endl;
+    cout << " #-----------------------------------------------------------#"<<endl;
+    cout << " # Tras una busqueda permite eliminar el contacto deseado.   #" << endl;
+    cout << " #-=========================================================-#"<<endl<< endl;
+    cout << " #-=========================================================-#"<<endl;
+    cout << " #                RECUPERAR CONTACTO ELIMINADO               #" << endl;
+    cout << " #-----------------------------------------------------------#"<<endl;
+    cout << " # Recupera un contacto eliminado mediante la eleccion       #" << endl;
+    cout << " # de un ID tanto de contacto como de telefono.              #" << endl;
+    cout << " #-=========================================================-#"<<endl<< endl;
+    cin.get();
+}
 
-        default:
-        {
-            cout <<"Opcion no valida!!!";
-            cin.get();
-        }
-        break;
-        }
+////===========================================================================
+//// FUNCION   : void menu_mod().
+//// ACCION    : Muestra menu modificacion de registro.
+//// PARAMETROS: NADA.
+//// DEVUELVE  : NADA.
+////---------------------------------------------------------------------------
+void menu_mod()
+{
+    cout<< " ======================================="<<endl;
+    cout<< "|                                       |"<<endl;
+    cout<< "| 1) - MODIFICAR DATOS DEL CONTACTO     |"<<endl;
+    cout<< "| 2) - MODIFICAR DATOS DE SUS TELEFONOS |"<<endl;
+    cout<< "| 0) - VOLVER AL MENU PRINCIPAL         |"<<endl;
+    cout<< "|                                       |"<<endl;
+    cout<< " ======================================= "<<endl;
+    cout<< " INGRESE UNA OPCION: ";
+}
 
-    }
-    return result;
+
+////===========================================================================
+//// FUNCION   : void menu_mod_datos().
+//// ACCION    : Muestra menu modificacion datos contacto.
+//// PARAMETROS: NADA.
+//// DEVUELVE  : NADA.
+////---------------------------------------------------------------------------
+void menu_mod_datos()
+{
+    cout<< " =================================="<<endl;
+    cout<< "|                                  |"<<endl;
+    cout<< "|  1) - MODIFICAR ALIAS            |"<<endl;
+    cout<< "|  2) - MODIFICAR CORREO           |"<<endl;
+    cout<< "|  0) - VOLVER AL MENU PRINCIPAL   |"<<endl;
+    cout<< "|                                  |"<<endl;
+    cout<< " =================================="<<endl;
+    cout<< " INGRESE UNA OPCION: ";
+}
+
+////===========================================================================
+//// FUNCION   : void menu_mod_telefonos().
+//// ACCION    : Muestra menu modificacion telefonos contacto.
+//// PARAMETROS: NADA.
+//// DEVUELVE  : NADA.
+////---------------------------------------------------------------------------
+void menu_mod_telefonos()
+{
+    cout<< " =================================="<<endl;
+    cout<< "|                                  |"<<endl;
+    cout<< "|  1) - AGREGAR TELEFONOS          |"<<endl;
+    cout<< "|  2) - ELIMINAR TELEFONOS         |"<<endl;
+    cout<< "|  3) - RECUPERAR TELEFONO         |"<<endl;
+    cout<< "|  0) - VOLVER AL MENU PRINCIPAL   |"<<endl;
+    cout<< "|                                  |"<<endl;
+    cout<< " =================================="<<endl;
+    cout<< " INGRESE UNA OPCION: ";
+}
+
+////===========================================================================
+//// FUNCION   : void menu_switch_mod_telefono().
+//// ACCION    : Muestra menu modificacion de telefono.
+//// PARAMETROS: NADA.
+//// DEVUELVE  : NADA.
+////---------------------------------------------------------------------------
+void menu_switch_mod_telefono()
+{
+    cout<< " =================================="<<endl;
+    cout<< "|                                  |"<<endl;
+    cout<< "|  1) - MODIFICAR TIPO             |"<<endl;
+    cout<< "|  2) - MODIFICAR NUMERO           |"<<endl;
+    cout<< "|  0) - VOLVER AL MENU PRINCIPAL   |"<<endl;
+    cout<< "|                                  |"<<endl;
+    cout<< " =================================="<<endl;
+    cout<< " INGRESE UNA OPCION: ";
+}
+
+////===========================================================================
+//// FUNCION   : void menu_mod_datos().
+//// ACCION    : Muestra menu modificacion datos contacto.
+//// PARAMETROS: NADA.
+//// DEVUELVE  : NADA.
+////---------------------------------------------------------------------------
+void menu_mod_contacto()
+{
+    cout<< " =================================="<<endl;
+    cout<< "|                                  |"<<endl;
+    cout<< "|  1) - MODIFICAR APELLIDO         |"<<endl;
+    cout<< "|  2) - MODIFICAR NOMBRE           |"<<endl;
+    cout<< "|  3) - MODIFICAR ALIAS            |"<<endl;
+    cout<< "|  4) - MODIFICAR CORREO           |"<<endl;
+    cout<< "|  0) - VOLVER AL MENU PRINCIPAL   |"<<endl;
+    cout<< "|                                  |"<<endl;
+    cout<< " =================================="<<endl;
+    cout<< " INGRESE UNA OPCION: ";
+}
+
+////===========================================================================
+//// FUNCION   : void menu_eliminar_registro().
+//// ACCION    : Muestra menu eliminacion de registro
+//// PARAMETROS: NADA.
+//// DEVUELVE  : NADA.
+////---------------------------------------------------------------------------
+void menu_eliminar_registro()
+{
+    cout<< " =================================="<<endl;
+    cout<< "|                                  |"<<endl;
+    cout<< "|  1) - ELIMINAR CONTACTO          |"<<endl;
+    cout<< "|  2) - ELIMINAR TELEFONO          |"<<endl;
+    cout<< "|  0) - VOLVER AL MENU PRINCIPAL   |"<<endl;
+    cout<< "|                                  |"<<endl;
+    cout<< " =================================="<<endl;
+    cout<< " INGRESE UNA OPCION: ";
 }
 
 //===========================================================================
@@ -169,14 +254,19 @@ bool subMenu2()
 // PARAMETROS: NADA.
 // DEVUELVE  : NADA.
 //---------------------------------------------------------------------------
-void mostrarSubMenu1()
+void mostrar_Sub_Menu_buscar()
 {
-    cout <<"|-----------------SUBMENU 1-------------------|"<<endl;
-    cout <<"| A-Ir a SubMenu3                             |"<<endl;
-    cout <<"| B-Baja                                      |"<<endl;
-    cout <<"| C-Volver                                    |"<<endl;
-    cout <<"| D-Salir del programa                        |"<<endl;
-    cout <<"|---------------------------------------------|"<<endl;
+    cout<< " ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»"<<endl;
+    cout<< " º           OPCIONES DE BUSQUEDA            º"<<endl;
+    cout<< " ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶"<<endl;
+    cout<< " º                                           º"<<endl;
+    cout<< " º  A ) Buscar por Apellido                  º"<<endl;
+    cout<< " º  B ) Buscar por Nombre                    º"<<endl;
+    cout<< " º  C ) Buscar por Alias                     º"<<endl;
+    cout<< " º  D ) Volver a Menu Principal              º"<<endl;
+    cout<< " º                                           º"<<endl;
+    cout<< " ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼\n"<<endl;
+    cout<< "INGRESE UNA OPCION: ";
 }
 
 //===========================================================================
@@ -185,53 +275,82 @@ void mostrarSubMenu1()
 // PARAMETROS: NADA.
 // DEVUELVE  : Si desea salir del programa o no.
 //---------------------------------------------------------------------------
-bool subMenu1()
+bool sub_Menu_Buscar(int mod_bus)
 {
     bool result = false;
     bool salir= false;//variable que controla el ciclo del menu
     char opcion;//variable que guarda la opcion seleccionada por el usuario
+
+    bool encontro = true;
+
     while(!salir)
     {
-        sys::cls();//Limpio la pantalla
-        mostrarSubMenu1(); //Muestro el menu
-        cout<< "Ingrese una opcion: "; //Solicitio al usuario que ingrese una opcion
-        cin.get(opcion);//Guardo el ingreso del usuario
-        cin.ignore();//Limpio el buffer de teclado
+        sys::cls();
+        mostrar_Sub_Menu_buscar();
+        cin.get(opcion);
+        cin.ignore();
+
         switch(opcion)//Evaluo la variable opcion
         {
-        case 'a':
-        case 'A':
+            case 'a':
+            case 'A':
+            {
+                if( !buscar(1) )
+                {
+                    encontro = false; // Si no encontro, no se puede modificar
+                    cout << "No se encontro el Apellido buscado...";
+                    cin.get();
+                }
+
+            }break;
+
+            case 'b':
+            case 'B':
+            {
+                if( !buscar(2) )
+                {
+                    encontro = false; // Si no encontro, no se puede modificar
+                    cout << "No se encontro el Nombre buscado...";
+                    cin.get();
+                }
+
+            }break;
+
+            case 'c':
+            case 'C':
+            {
+                if( !buscar(3) )
+                {
+                    encontro = false; // Si no encontro, no se puede modificar
+                    cout << "No se encontro el Alias buscado...";
+                    cin.get();
+                }
+
+            }break;
+
+            case 'd':
+            case 'D':
+            {
+                encontro = false; // Si no encontro, no se puede modificar
+//                result= true;//Para salir del programa
+                salir=true;
+
+            }break;
+
+            default:
+            {
+                cout <<"Opcion no valida!!!";
+                cin.get();
+            }break;
+        }
+
+
+        if ( mod_bus == 1 || mod_bus == 3 )
         {
-            result=subMenu3();
-            salir= result;
+            if (encontro == true)
+                preguntar_id(mod_bus);
         }
-        break;
-        case 'b':
-        case 'B':
-        {
-            cout <<"La baja se realizo correctamente!!!";
-        }
-        break;
-        case 'c':
-        case 'C':
-        {
-            salir=true;
-        }
-        break;
-        case 'd':
-        case 'D':
-        {
-            result= true;//Para salir del programa
-            salir=true;
-        }
-        break;
-        default:
-        {
-            cout <<"Opcion no valida!!!";
-            cin.get();
-        }
-        break;
-        }
+
 
     }
     return result;
@@ -245,13 +364,22 @@ bool subMenu1()
 //---------------------------------------------------------------------------
 void mostrarMenuPrincipal()
 {
-    cout <<"|---------------MENU PRINCIPAL----------------|"<<endl;
-    cout <<"| I - C A R G A R                             |"<<endl;
-    cout <<"| A - M O D I F I C A R                       |"<<endl;
-    cout <<"| B - B U S C A R                             |"<<endl;
-    cout <<"| A - M O S T R A R                           |"<<endl;
-    cout <<"| S - S A L I R                               |"<<endl;
-    cout <<"|---------------------------------------------|"<<endl;
+    sys::cls();
+    cout<< " ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»"<<endl;
+    cout<< " º               AGENDA ELECTRONICA                 º"<<endl;
+    cout<< " ÇÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¶"<<endl;
+    cout<< " º                                                  º"<<endl;
+    cout<< " º  C ) C A R G A R                                 º"<<endl;
+    cout<< " º  M ) M O D I F I C A R                           º"<<endl;
+    cout<< " º  B ) B U S C A R                                 º"<<endl;
+    cout<< " º  L ) L I S T A R                                 º"<<endl;
+    cout<< " °  A ) R E C U P E R A R  C O N T A C T O          °"<<endl;
+    cout<< " º  D ) E L I M I N A R                             º"<<endl;
+    cout<< " º  H ) A Y U D A                                   º"<<endl;
+    cout<< " º  S ) S A L I R                                   º"<<endl;
+    cout<< " º                                                  º"<<endl;
+    cout<< " ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼\n"<<endl;
+    cout << "INGRESE UNA OPCION: ";
 }
 
 //===========================================================================
@@ -260,52 +388,79 @@ void mostrarMenuPrincipal()
 // PARAMETROS: NADA.
 // DEVUELVE  : NADA.
 //---------------------------------------------------------------------------
-void menuPrincipal(datContacto *d, telContacto *t)
+void menuPrincipal()
 {
+    contar_ID();
+
     bool salir= false;
     char opcion;
-    while(!salir)
+
+    while( !salir )
     {
-        sys::cls();
         mostrarMenuPrincipal();
-        cout<< "Ingrese una opcion: ";
         cin.get(opcion);
         cin.ignore();
-        switch(opcion)
-        {
-        case 'I':
-        case 'i':
-        {
-            guardarDat(d);
-        }
-        break;
-        case 'A':
-        case 'a':
-        {
-            mostrarProducto(*d,*t);
-        }
-        break;
-        case 'C':
-        case 'c':
-        {
-            salir= subMenu2();
-        }
-        break;
-        case 'S':
-        case 's':
-        {
-            salir=true;
-        }
-        break;
-        default:
-        {
-            cout <<"Opcion no valida!!!";
-            cin.get();
-        }
-        break;
-        }
 
+        switch( opcion )
+        {
+            case 'c':
+            case 'C':
+            {
+                cargar_persona();
+            }break;
+
+            case 'm':
+            case 'M':
+            {
+                sub_Menu_Buscar(1);
+            }break;
+
+            case 'B':
+            case 'b':
+            {
+                sub_Menu_Buscar(2);
+            }break;
+
+            case 'D':
+            case 'd':
+            {
+                sub_Menu_Buscar(3);
+            }break;
+
+            case 'l':
+            case 'L':
+            {
+                mostrar_contactos();
+            }break;
+            case 'a':
+            case 'A':
+            {
+                mostrar_contactos_eliminados();
+            }break;
+
+            case 'H':
+            case 'h':
+            {
+                ayuda();
+                // crear funcion ayuda
+            }break;
+
+            case 'S':
+            case 's':
+            {
+                despedida();
+                salir=true;
+            }break;
+
+            default:
+            {
+                cout <<"Opcion no valida!!!";
+                cin.get();
+            }break;
+        }
     }
 }
+
+
 
 #endif // MENUS_H

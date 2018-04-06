@@ -1,9 +1,9 @@
 //#############################################################################
 // ARCHIVO             : main.cpp
-// AUTOR/ES            : nombre/s de autor/es
+// AUTOR/ES            : Mansilla Francisco / Albornoz Roberto.
 // VERSION             : 0.01 beta.
 // FECHA DE CREACION   : 31/08/2017.
-// ULTIMA ACTUALIZACION: 31/08/2017.
+// ULTIMA ACTUALIZACION: 18/09/2017.
 // LICENCIA            : GPL (General Public License) - Version 3.
 //
 //  **************************************************************************
@@ -67,12 +67,13 @@
 #include <cstdlib>  // Libreria estandar que contiene la funcion exit().
 #include <cstdio>
 #include <string.h>
-
+#include <string>
 //*****************************************************************************
 //                             INCLUSIONES PERSONALES
 //=============================================================================
 #include "CSYSTEM/csystem.h" // Libreria para multiplataforma.
 #include "Menus.h"
+#include <cmath>
 #include "MisFunciones.h"
 //==============================================================================
 // DECLARACION DEL ESPACIO DE NOMBRES POR DEFECTO
@@ -86,24 +87,8 @@ using namespace std;
 
 int main()
 {
-    datContacto contacto;
-    telContacto telefono;
-
-    menuPrincipal(&contacto, &telefono);
-    //mostrarProducto(producto);
-
-
-//    FILE *archivo;
-//    archivo= fopen(ruta, "wb");
-//    if(archivo!=NULL)
-//    {
-//        fwrite(&producto,sizeof(producto),1,archivo);
-//        fclose(archivo);
-//    }
-    //cout << producto.id << " - " << producto.nombre;
-
-
-
+    presentacion();
+    menuPrincipal();
 
     //--------------------------------------------------------------------------
     // FIN DE LA FUNCION main() SIN ERRORES.
