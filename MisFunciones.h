@@ -114,6 +114,50 @@ int strToInt (char* cadena)
 
 }
 
+//-----------------------------------------------------------------------------
+//=============================================================================
+// FUNCION : void abrirArchPer()
+// ACCION : abre archivo de personas
+// PARAMETROS:
+// DEVUELVE : tipo --> int
+//-----------------------------------------------------------------------------
+void abrirArchPer()
+{
+
+    FILE *arch_per;
+    arch_per = fopen(ruta_persona,"rb");
+    if(arch_per == NULL)
+        exit(99);
+}
+
+//=============================================================================
+// FUNCION : void abrirArchTel()
+// ACCION : abre archivo de telefono
+// PARAMETROS:
+// DEVUELVE : tipo --> int
+//-----------------------------------------------------------------------------
+void abrirArchTel()
+{
+    FILE *arch_tel;
+    arch_tel = fopen(ruta_telefono,"rb");
+    if(arch_tel == NULL)
+        exit(98);
+}
+
+//=============================================================================
+// FUNCION : void abrirArchPerEnc()
+// ACCION : abre archivo de personas encontradas
+// PARAMETROS:
+// DEVUELVE : tipo --> int
+//-----------------------------------------------------------------------------
+void abrirArchPerEnc()
+{
+    FILE *arch_per_enc;
+    arch_per_enc = fopen(ruta_per_encontradas, "rb");
+    if(arch_per_enc == NULL)
+        exit(97);
+}
+//-----------------------------------------------------------------------------
 
 
 ////===========================================================================
@@ -183,11 +227,10 @@ bool guardarTel(telefono tel)
 //// PARAMETROS: persona per, telefono *tel.
 //// DEVUELVE  : NADA.
 ////---------------------------------------------------------------------------
-void cargarTelefono(persona per, telefono *tel)
+void cargarTelefono(int id_persona, telefono *tel)
 {
     cout<< " Ingrese el TIPO del numero: ";
     sys::getline( tel->tipo, 50 );
-
     char cad_num[20];
     cout<< " Ingrese el NUMERO del contacto: ";
     sys::getline(cad_num,20);
@@ -210,7 +253,7 @@ void cargarTelefono(persona per, telefono *tel)
         }
     }
 
-    tel->id_persona = per.id_persona;
+    tel->id_persona = id_persona;
 
     tel->id_telefono = ID_tel;
 
@@ -225,7 +268,7 @@ void cargarTelefono(persona per, telefono *tel)
 //// PARAMETROS: persona per.
 //// DEVUELVE  : NADA.
 ////---------------------------------------------------------------------------
-void cargarTelefonos(persona per)
+void cargarTelefonos(int id_persona)
 {
     char opc[1];
     telefono tel;
@@ -235,9 +278,9 @@ void cargarTelefonos(persona per)
         sys::getline(opc,1);
         if(opc[0] == 'a' || opc[0] == 'A')
         {
-            if(tel.id_telefono != NULL)
+            if(ID_tel != NULL)
             {
-                cargarTelefono(per, &tel);
+                cargarTelefono(id_persona, &tel);
                 if(guardarTel(tel))
                 {
                     cout << "SE GUARDO EL TELEFONO CORRECTAMENTE...";
@@ -265,20 +308,17 @@ void cargarTelefonos(persona per)
 bool guardar_persona(persona per)
 {
     bool result = false;
+
     FILE *arch_per;
-
     arch_per = fopen(ruta_persona,"ab");
+    if(arch_per == NULL)
+        exit(99);
 
-    if(arch_per != NULL)
-    {
-        fwrite(&per, sizeof(persona), 1, arch_per);
-        fclose(arch_per);
-
-        cout << "\nSE GUARDO LA PERSONA CORRECTAMENTE..." << endl;
-        result = true;
-        ID_per ++;
-    }
-
+    fwrite(&per, sizeof(persona), 1, arch_per);
+    fclose(arch_per);
+    cout << "\nSE GUARDO LA PERSONA CORRECTAMENTE..." << endl;
+    result = true;
+    ID_per ++;
     return result;
 }
 
@@ -322,11 +362,8 @@ void cargar_persona()
     sys::cls();
     persona per;
     datos_persona(&per);
-
     guardar_persona(per);
-
-    cargarTelefonos(per);
-
+    cargarTelefonos(per.id_persona);
     sys::cls();
 }
 
@@ -338,69 +375,67 @@ void cargar_persona()
 ////---------------------------------------------------------------------------
 void mostrar_contactos()
 {
-    persona per;
-    telefono tel;
-
     FILE *arch_per;
     arch_per = fopen(ruta_persona,"rb");
+    if(arch_per == NULL)
+        exit(99);
+    persona per;
 
-    FILE *arch_tel;
-    arch_tel = fopen(ruta_telefono,"rb");
+//    FILE *arch_tel;
+//    arch_tel = fopen(ruta_telefono,"rb");
+//    if(arch_per == NULL)
+//        exit(98);
+//    telefono tel;
 
     int cont = 0;
     sys::cls();
 
-    if(arch_per != NULL)
+    while( fread(&per, sizeof(persona), 1, arch_per))
     {
-        while( fread(&per, sizeof(persona), 1, arch_per))
+        if(per.eliminado != true)
         {
-            if(!per.eliminado)
+            cout<< " ==================================="<<endl;
+            cout<< "           ID CONTACTO: "<< per.id_persona << endl;
+            cout<< " ==================================="<<endl;
+            cout<< " NOMBRE  : " << per.nombre << endl;
+            cout<< " APELLIDO: " << per.apellido << endl;
+            cout<< " CORREO  : " << per.email << endl;
+            cout<< " APODO   : " << per.alias << endl;
+
+            FILE *arch_tel;
+            arch_tel = fopen(ruta_telefono,"rb");
+            if(arch_per == NULL)
+                exit(98);
+            telefono tel;
+            //fseek(arch_tel, sizeof(telefono), SEEK_SET);
+            //fseek(arch_tel,-sizeof(tel),SEEK_CUR);
+            while(fread(&tel, sizeof(telefono), 1, arch_tel))
             {
-                cout<< " ==================================="<<endl;
-                cout<< "           ID CONTACTO: "<< per.id_persona << endl;
-                cout<< " ==================================="<<endl;
-                cout<< " NOMBRE  : " << per.nombre << endl;
-                cout<< " APELLIDO: " << per.apellido << endl;
-                cout<< " CORREO  : " << per.email << endl;
-                cout<< " APODO   : " << per.alias << endl;
-
-                fseek(arch_tel, sizeof(telefono), SEEK_SET);
-                fseek(arch_tel,-sizeof(tel),1);
-
-                if(arch_tel != NULL)
+                if (tel.eliminado != true)
                 {
-                    while(fread(&tel, sizeof(telefono), 1, arch_tel))
+                    if(per.id_persona == tel.id_persona)
                     {
-                        if (!tel.eliminado)
-                        {
-                            if(per.id_persona == tel.id_persona)
-                            {
-                                cout<< " -----------------------------------"<<endl;
-                                cout<< " ID TELEFONO: "<< tel.id_telefono << endl;
-                                cout<< " -----------------------------------"<<endl;
-                                cout<< " TELEFONO TIPO: " << tel.tipo << endl;
-                                cout<< " NUMERO       : " << tel.numero << endl;
-                            }
-                        }
-
+                        cout<< " -----------------------------------"<<endl;
+                        cout<< " ID TELEFONO: "<< tel.id_telefono << endl;
+                        cout<< " -----------------------------------"<<endl;
+                        cout<< " TELEFONO TIPO: " << tel.tipo << endl;
+                        cout<< " NUMERO       : " << tel.numero << endl;
                     }
-
                 }
-                cout<< " ==================================="<<endl<<endl;
+            }
+            fclose(arch_tel);
+            cout<< " ==================================="<<endl<<endl;
 
-                cont ++;
+            cont ++;
 
-                if(cont == 5)
-                {
-                    cin.get();
-                    sys::cls();
-                    cont = 0;
-                }
+            if(cont == 5)
+            {
+                cin.get();
+                sys::cls();
+                cont = 0;
             }
         }
     }
-
-    fclose(arch_tel);
     fclose(arch_per);
     cin.get();
 }
@@ -413,11 +448,6 @@ void mostrar_contactos()
 ////---------------------------------------------------------------------------
 void mostrar_contacto(persona per)
 {
-    telefono tel;
-
-    FILE *arch_tel;
-    arch_tel = fopen(ruta_telefono, "rb");
-
     cout<< " ==================================="<<endl;
     cout<< "           ID CONTACTO: "<< per.id_persona << endl;
     cout<< " ==================================="<<endl;
@@ -426,26 +456,26 @@ void mostrar_contacto(persona per)
     cout<< " CORREO  : " << per.email << endl;
     cout<< " APODO   : " << per.alias << endl;
 
+    FILE *arch_tel;
+    arch_tel = fopen(ruta_telefono, "rb");
     if(arch_tel != NULL)
+        exit(98);
+    telefono tel;
+    while(fread(&tel, sizeof(telefono), 1, arch_tel))
     {
-        while(fread(&tel, sizeof(telefono), 1, arch_tel))
+        if(per.id_persona == tel.id_persona &&
+                tel.eliminado != true)
         {
-            if(per.id_persona == tel.id_persona &&
-                    !tel.eliminado)
-            {
-                cout<< " -----------------------------------"<<endl;
-                cout<< " ID TELEFONO: "<< tel.id_telefono << endl;
-                cout<< " -----------------------------------"<<endl;
-                cout<< " TELEFONO TIPO: " << tel.tipo << endl;
-                cout<< " NUMERO       : " << tel.numero << endl;
-            }
-
+            cout<< " -----------------------------------"<<endl;
+            cout<< " ID TELEFONO: "<< tel.id_telefono << endl;
+            cout<< " -----------------------------------"<<endl;
+            cout<< " TELEFONO TIPO: " << tel.tipo << endl;
+            cout<< " NUMERO       : " << tel.numero << endl;
         }
     }
-
+    fclose(arch_tel);
     cout<< " ==================================="<<endl;
 
-    fclose(arch_tel);
 }
 
 //=============================================================================
@@ -569,6 +599,60 @@ void mostrar_opcion_busqueda(int opc)
     }
 }
 
+//===========================================================================
+// FUNCION   : void mostrar_contactosEncontrados(persona per)
+// ACCION    : Muestra contactos encontrados
+// PARAMETROS: NADA.
+// DEVUELVE  : NADA.
+//---------------------------------------------------------------------------
+void mostrar_contactosEncontrados()
+{
+    FILE *arch_per_enc;
+    arch_per_enc = fopen(ruta_persona,"rb");
+    if(arch_per_enc == NULL)
+        exit(97);
+    persona per;
+
+    while(fread(&per, sizeof(persona), 1, arch_per_enc))
+    {
+            cout<< " ==================================="<<endl;
+            cout<< "           ID CONTACTO: "<< per.id_persona << endl;
+            cout<< " ==================================="<<endl;
+            cout<< " NOMBRE  : " << per.nombre << endl;
+            cout<< " APELLIDO: " << per.apellido << endl;
+            cout<< " CORREO  : " << per.email << endl;
+            cout<< " APODO   : " << per.alias << endl;
+
+            FILE *arch_tel;
+            arch_tel = fopen(ruta_telefono,"rb");
+            if(arch_tel == NULL)
+                exit(98);
+            telefono tel;
+
+            while(fread(&tel, sizeof(telefono), 1, arch_tel))
+            {
+                if (tel.eliminado != true)
+                {
+                    if(per.id_persona == tel.id_persona)
+                    {
+                        cout<< " -----------------------------------"<<endl;
+                        cout<< " ID TELEFONO: "<< tel.id_telefono << endl;
+                        cout<< " -----------------------------------"<<endl;
+                        cout<< " TELEFONO TIPO: " << tel.tipo << endl;
+                        cout<< " NUMERO       : " << tel.numero << endl;
+                    }
+                }
+
+            }
+            fclose(arch_tel);
+            cout<< " ==================================="<<endl<<endl;
+            //cont ++;
+        }
+    }
+    fclose(arch_per_enc);
+}
+
+
 ////===========================================================================
 //// FUNCION   :bool buscar(int opc).
 //// ACCION    : busca de forma generica un contacto por Apellido,Nombre o Alias
@@ -577,83 +661,90 @@ void mostrar_opcion_busqueda(int opc)
 ////---------------------------------------------------------------------------
 bool buscar(int opc)
 {
-    FILE *arch_per = fopen(ruta_persona, "rb+" );
+    FILE *arch_per;
+    arch_per = fopen(ruta_persona,"rb");
+    if(arch_per == NULL)
+        exit(99);
+
+    FILE *arch_per_enc;
+    arch_per_enc = fopen(ruta_per_encontradas, "wb");
+    if(arch_per_enc == NULL)
+        exit(97);
+
     persona per;
+
     char sub_cadena[30];
     bool retorno = false;
     int encontrado = 0;
-    FILE *arch_per_encotradas = fopen(ruta_per_encontradas, "wb" );
 
     mostrar_opcion_busqueda(opc);
     sys::getline(sub_cadena, 30);
     sys::cls();
-
-
+    //TODO: ver elputo personas encontradas...
     while(fread(&per, sizeof(persona),1,arch_per))
     {
         if(per.eliminado != true)
         {
             encontrado = 0;
-
             switch (opc)
             {
-            case 1:
-            {
-                if ( buscar_subcadena(per.apellido, sub_cadena ) != -1 )
+                case 1:
                 {
-                    mostrar_contacto(per);
-                    retorno = true;
-                    encontrado = 1;
+                    if ( buscar_subcadena(per.apellido, sub_cadena ) != -1 )
+                    {
+                        //mostrar_contacto(per);
+                        retorno = true;
+                        encontrado = 1;
+                    }
                 }
-            }
-            break;
+                break;
 
-            case 2:
-            {
-                if ( buscar_subcadena(per.nombre, sub_cadena ) != -1 )
+                case 2:
                 {
-                    mostrar_contacto(per);
-                    retorno = true;
-                    encontrado = 1;
+                    if ( buscar_subcadena(per.nombre, sub_cadena ) != -1 )
+                    {
+                        //mostrar_contacto(per);
+                        retorno = true;
+                        encontrado = 1;
+                    }
                 }
-            }
-            break;
+                break;
 
-            case 3:
-            {
-                if ( buscar_subcadena(per.alias, sub_cadena ) != -1 )
+                case 3:
                 {
-                    mostrar_contacto(per);
-                    retorno = true;
-                    encontrado = 1;
+                    if ( buscar_subcadena(per.alias, sub_cadena ) != -1 )
+                    {
+                        //mostrar_contacto(per);
+                        retorno = true;
+                        encontrado = 1;
+                    }
                 }
+                break;
+
+                default:
+                {
+                    retorno = false;
+                    encontrado = 2;
+                } break;
             }
-            break;
-
-            default:
-            {
-
-            } break;
-            }
-
             if (encontrado  == 1)
-                fwrite(&per, sizeof(per), 1, arch_per_encotradas);
+            {
+                fwrite(&per, sizeof(per), 1, arch_per_enc);
+            }
+
         }
-
     }
-
-    cin.get();
-
     fclose(arch_per);
-    fclose(arch_per_encotradas);
-
+    fclose(arch_per_enc);
+    mostrar_contactosEncontrados();
+    cin.get();
     return retorno;
 }
 
 ////===========================================================================
 //// FUNCION   : void modificar_dato_persona(int opc, int id_persona, char* nuevo_dato).
 //// ACCION    : Dependiendo de la opc recivida, modifica el contacto o lo elimina
-//// PARAMETROS: opc, ed_persona, nuevo_dato.
+//// PARAMETROS: int opc, int id_persona, char* nuevo_dato
 //// DEVUELVE  : NADA.
 ////---------------------------------------------------------------------------
 void modificar_dato_persona(int opc, int id_persona, char* nuevo_dato)
@@ -666,34 +757,76 @@ void modificar_dato_persona(int opc, int id_persona, char* nuevo_dato)
         if ( id_persona == per.id_persona &&
                 per.eliminado == false )
         {
-            if (opc == 1 )
+            switch(opc)
+            {
+            case 1:
+            {
                 strcpy(per.apellido, nuevo_dato);
-
-            if (opc == 2 )
+            }
+            break;
+            case 2:
+            {
                 strcpy(per.nombre, nuevo_dato);
-
-            if (opc == 3 )
+            }
+            break;
+            case 3:
+            {
                 strcpy(per.alias, nuevo_dato);
-
-            if (opc == 4 )
+            }
+            break;
+            case 4:
+            {
                 strcpy(per.email, nuevo_dato);
-
-            if(opc == 5)
+            }
+            break;
+            case 5:
+            {
                 per.eliminado = true;
-
-            fseek(arch_per,-sizeof(per),1);
+            }
+            break;
+            }
+            fseek(arch_per,-sizeof(per)*id_persona,SEEK_CUR);
             fwrite(&per, sizeof(persona),1,arch_per);
+            fclose(arch_per);
 
             if (opc == 5)
                 cout<<"Contacto Eliminado"<<endl;
             else
                 cout<<"Contacto Modificado"<<endl;
-
             sys::msleep(2);
             break;
         }
+//        if ( id_persona == per.id_persona &&
+//                per.eliminado == false )
+//        {
+//            if (opc == 1 )
+//                strcpy(per.apellido, nuevo_dato);
+//
+//            if (opc == 2 )
+//                strcpy(per.nombre, nuevo_dato);
+//
+//            if (opc == 3 )
+//                strcpy(per.alias, nuevo_dato);
+//
+//            if (opc == 4 )
+//                strcpy(per.email, nuevo_dato);
+//
+//            if(opc == 5)
+//                per.eliminado = true;
+//
+//            fseek(arch_per,-sizeof(per)*id_persona,SEEK_CUR);
+//            fwrite(&per, sizeof(persona),1,arch_per);
+//            fclose(arch_per);
+//
+//            if (opc == 5)
+//                cout<<"Contacto Eliminado"<<endl;
+//            else
+//                cout<<"Contacto Modificado"<<endl;
+//
+//            sys::msleep(2);
+//            break;
+//        }
     }
-
     fclose(arch_per);
     cin.get();
 }
@@ -706,78 +839,102 @@ void modificar_dato_persona(int opc, int id_persona, char* nuevo_dato)
 ////---------------------------------------------------------------------------
 void editar_telefono(persona per, int id_telefono, int opcion, int nuevo_numero, char* nuevo_tipo)
 {
-    telefono tel;
     bool modificado = false;
 
     FILE *arch_tel;
     arch_tel = fopen(ruta_telefono, "rb+");
 
-    if(arch_tel != NULL)
+    if(arch_tel == NULL)
+        exit(98);
+    telefono tel;
+    while(fread(&tel, sizeof(telefono), 1, arch_tel))
     {
-        while(fread(&tel, sizeof(telefono), 1, arch_tel))
+        if( tel.id_persona == per.id_persona &&
+                id_telefono == tel.id_telefono &&
+                tel.eliminado != false)
         {
-            if(opcion == 4)
+            switch(opcion)
             {
-                if( tel.id_persona == per.id_persona &&
-                        id_telefono == tel.id_telefono &&
-                        tel.eliminado)
-                {
-                    tel.eliminado = false; //TODO: revisar
-                    cout<< "Telefono Recuperado"<<endl;
-                    modificado = true;
-                }
-            }
-
-            else
+            case 1:
             {
-                if( tel.id_persona == per.id_persona &&
-                        id_telefono == tel.id_telefono &&
-                        !tel.eliminado )
-                {
-                    if(opcion == 1)
-                    {
-                        tel.eliminado = true;
-                        cout<< "Telefono Eliminado"<<endl;
-                    }
-
-                    if(opcion == 2)
-                    {
-                        strcpy(tel.tipo, nuevo_tipo);
-                        cout<< "Tipo de telefono Modificado"<<endl;
-                    }
-
-                    if(opcion == 3)
-                    {
-                        tel.numero = nuevo_numero;
-                        cout<< "Numero de telefono Modificado"<<endl;
-                    }
-
-                    modificado = true;
-                }
+                tel.eliminado = true;
+                cout<< "Telefono Eliminado"<<endl;
             }
-
-            if(modificado == true)
+            break;
+            case 2:
             {
-
-
-                fseek(arch_tel, -sizeof(tel), 1);
-                fwrite(&tel, sizeof(telefono), 1, arch_tel);
-
-
-
-                sys::msleep(2);
-
-                break;
+                strcpy(tel.tipo, nuevo_tipo);
+                cout<< "Tipo de telefono Modificado"<<endl;
             }
+            break;
+            case 3:
+            {
+                tel.numero = nuevo_numero;
+                cout<< "Numero de telefono Modificado"<<endl;
+            }
+            break;
+            case 4:
+            {
+                tel.eliminado = false; //TODO: revisar
+                cout<< "Telefono Recuperado"<<endl;
+            }
+            break;
+            }
+            modificado = true;
         }
+//            if(opcion == 4)
+//            {
+//                if( tel.id_persona == per.id_persona &&
+//                        id_telefono == tel.id_telefono &&
+//                        tel.eliminado != false)
+//                {
+//                    tel.eliminado = false; //TODO: revisar
+//                    cout<< "Telefono Recuperado"<<endl;
+//                    modificado = true;
+//                }
+//            }
+//
+//            else
+//            {
+//                if( tel.id_persona == per.id_persona &&
+//                        id_telefono == tel.id_telefono &&
+//                        tel.eliminado != false)
+//                {
+//                    if(opcion == 1)
+//                    {
+//                        tel.eliminado = true;
+//                        cout<< "Telefono Eliminado"<<endl;
+//                    }
+//
+//                    if(opcion == 2)
+//                    {
+//                        strcpy(tel.tipo, nuevo_tipo);
+//                        cout<< "Tipo de telefono Modificado"<<endl;
+//                    }
+//
+//                    if(opcion == 3)
+//                    {
+//                        tel.numero = nuevo_numero;
+//                        cout<< "Numero de telefono Modificado"<<endl;
+//                    }
+//                    modificado = true;
+//                }
+//            }
 
-        if(modificado != true)
-            cout<<"El ID de telefono no pertenece a este contacto o no existe"<<endl;
+
     }
 
-
+    if(modificado == true)
+    {
+        fseek(arch_tel, -sizeof(tel)*tel.id_telefono, 1);
+        fwrite(&tel, sizeof(telefono), 1, arch_tel);
+        fclose(arch_tel);
+        sys::msleep(2);
+    }
     fclose(arch_tel);
 
+    if(modificado != true)
+        cout<<"El ID de telefono no pertenece a este contacto o no existe"<<endl;
     cin.get();
 }
 
@@ -862,36 +1019,29 @@ void modificar_contacto(persona per)
 ////---------------------------------------------------------------------------
 void eliminar_telefono(int id_telefono)
 {
-    telefono tel;
-
     FILE *arch_tel;
     arch_tel = fopen(ruta_telefono, "rb+");
 
-    if(arch_tel != NULL)
+    if(arch_tel == NULL) exit(98);
+    telefono tel;
+    while(fread(&tel, sizeof(telefono), 1, arch_tel))
     {
-        while(fread(&tel, sizeof(telefono), 1, arch_tel))
+        if(id_telefono == tel.id_telefono)
         {
-            if(id_telefono == tel.id_telefono)
-            {
-                tel.eliminado = true;
+            tel.eliminado = true;
 
-                fseek(arch_tel, -sizeof(tel), 1);
-                fwrite(&tel, sizeof(telefono), 1, arch_tel);
+            fseek(arch_tel, -sizeof(tel)*id_telefono, 1);
+            fwrite(&tel, sizeof(telefono), 1, arch_tel);
 
-                cout<< "TELEFONO ELIMINADO" << endl;
-                sys::msleep(2);
+            cout<< "TELEFONO ELIMINADO" << endl;
+            sys::msleep(2);
 
-                break;
-            }
+            break;
         }
-
-        if(tel.eliminado != true)
-            cout<<"INGRESASTE UN ID INVALIDO..."<<endl;
-
     }
-
     fclose(arch_tel);
-
+    if(tel.eliminado != true)
+        cout<<"INGRESASTE UN ID INVALIDO..."<<endl;
     cin.get();
 }
 
@@ -928,7 +1078,6 @@ void modificar_lista_contactos(persona per, int id_telefono)
             cout<<"Ingrese el nuevo Telefono"<<endl;
             cin>>numero;
             editar_telefono(per, id_telefono, 3, numero, "tipo");
-
             salir = true;
         }
         break;
@@ -936,7 +1085,6 @@ void modificar_lista_contactos(persona per, int id_telefono)
         case 0:
         {
             salir = true;
-
         }
         break;
         default:
@@ -975,7 +1123,7 @@ void modificar_telefono(persona per)
         {
         case 1:
         {
-            cargarTelefonos(per);
+            cargarTelefonos(per.id_persona);
         }
         break;
 
@@ -986,20 +1134,21 @@ void modificar_telefono(persona per)
             modificar_lista_contactos(per, id_telefono);
             salir = true;
 
-            }break;
+        }
+        break;
 
-            case 3:
-            {
-                mostrar_contactos_eliminados();
-                salir = true;
+        case 3:
+        {
+            mostrar_contactos_eliminados();
+            salir = true;
+        }
+        break;
 
-            }break;
-
-            case 0:
-            {
-                salir = true;
-
-            }break;
+        case 0:
+        {
+            salir = true;
+        }
+        break;
 
         default:
         {
@@ -1029,9 +1178,6 @@ void modificar_registro(persona per)
         cin>>opci;
         cin.ignore();
 
-
-
-
         switch(opci)
         {
         case 1:
@@ -1056,10 +1202,12 @@ void modificar_registro(persona per)
         {
             cout<<"Opcion incorrecta"<<endl;
             sys::msleep(2);
-            cin>>opci;
-            cin.ignore();
+//            cin>>opci;
+//            cin.ignore();
         }
+        break;
         }
+
     }
 
 }
@@ -1074,8 +1222,6 @@ void eliminar_registro(persona per)
 {
     int id_telefono, opci;
     bool salir = false;
-
-
     sys::cls();
 
     mostrar_contacto(per);
@@ -1092,8 +1238,6 @@ void eliminar_registro(persona per)
         {
         case 1:
         {
-
-
             modificar_dato_persona(5, per.id_persona, "A");
             salir = true;
         }
@@ -1106,9 +1250,7 @@ void eliminar_registro(persona per)
             cin.ignore();
             if(id_telefono != 0)
                 editar_telefono(per, id_telefono,1, 0, "A");
-
             salir = true;
-
         }
         break;
 
@@ -1123,7 +1265,6 @@ void eliminar_registro(persona per)
         {
             cout<<"Opcion incorrecta"<<endl;
             sys::msleep(2);
-
         }
         break;
         }
@@ -1143,51 +1284,46 @@ void preguntar_id( int opc )
     int id_contacto;
     int encontrar = 2;
 
-
     cout<< "Ingrese el ID dentro de la lista resultado (cero para volver al menu anterior)"<<endl;
     cin>> id_contacto;
     cin.ignore();
 
     while (encontrar == 2 && id_contacto != 0)
     {
-        while(fread (&per, sizeof(persona), 1, arch_per_encotradas)
-                && (id_contacto == per.id_persona))
+        while(fread (&per, sizeof(persona), 1, arch_per_encotradas))
         {
-            sys::cls();
-            mostrar_contacto(per);
+            if(id_contacto == per.id_persona)
+            {
+                sys::cls();
+                mostrar_contacto(per);
+                cin.get();
+                if (opc == 3)
+                    eliminar_registro(per);
+                else
+                    modificar_registro(per);
 
-            cin.get();
+                encontrar = 1;
+                fclose(arch_per_encotradas);
+                break;
+            }
 
-            if (opc == 3)
-                eliminar_registro(per);
-            else
-                modificar_registro(per);
-
-            encontrar = 1;
-
-            break;
         }
 
-        if( encontrar == 2)
+        if( encontrar == 2 )
         {
             sys::cls();
             cout<< "El ID ingresado no esta en la lista de encontrados:  "<<endl<<endl;
             cout<< "Ingrese el ID dentro de la lista resultado  (cero para volver al menu anterior)"<<endl;
             cin>> id_contacto;
             cin.ignore();
-
-
-
         }
     }
-
     fclose(arch_per_encotradas);
-
 }
 
 ////===========================================================================
-//// FUNCION   : void mostrar_contactos_eliminados().
-//// ACCION    :
+//// FUNCION   : void recuperar_contacto(int id_contacto).
+//// ACCION    : recupera contacto.
 //// PARAMETROS: NADA.
 //// DEVUELVE  : NADA.
 ////---------------------------------------------------------------------------
@@ -1199,6 +1335,7 @@ void recuperar_contacto(int id_contacto)
 
     if(arch_per != NULL)
     {
+        int pos = 0;
         while(fread(&per, sizeof(persona), 1, arch_per))
         {
             if(per.id_persona == id_contacto &&
@@ -1210,15 +1347,17 @@ void recuperar_contacto(int id_contacto)
 
             if(modificado == true)
             {
-                fseek(arch_per,-sizeof(per),1);
+                fseek(arch_per,-sizeof(per)*pos,1);
                 fwrite(&per, sizeof(persona),1,arch_per);
+                fclose(arch_per);
                 sys::cls();
                 cout<<"Contacto recuperado:   "<<endl<<endl;
                 mostrar_contacto(per);
                 break;
             }
-
+            pos++;
         }
+        fclose(arch_per);
 
         if(modificado == false)
         {
@@ -1226,77 +1365,75 @@ void recuperar_contacto(int id_contacto)
             sys::msleep(2);
         }
     }
-
+    cin.get();
 }
 
 ////===========================================================================
 //// FUNCION   : void mostrar_contactos_eliminados().
-//// ACCION    :
+//// ACCION    : muestra contactos eliminados
 //// PARAMETROS: NADA.
 //// DEVUELVE  : NADA.
 ////---------------------------------------------------------------------------
 void mostrar_contactos_eliminados()
 {
-    persona per;
-    telefono tel;
     int id_contacto;
 
     FILE *arch_per;
     arch_per = fopen(ruta_persona,"rb");
+    if(arch_per == NULL)
+        exit(99);
+    persona per;
 
     FILE *arch_tel;
     arch_tel = fopen(ruta_telefono,"rb");
+    if(arch_tel == NULL)
+        exit(98);
+    telefono tel;
 
     int cont = 0;
     sys::cls();
 
-    if(arch_per != NULL)
+    while(fread(&per, sizeof(persona), 1, arch_per))
     {
-        while( fread(&per, sizeof(persona), 1, arch_per))
+        if(per.eliminado != false)
         {
-            if(per.eliminado != false)
+            cout<< " ==================================="<<endl;
+            cout<< "           ID CONTACTO: "<< per.id_persona << endl;
+            cout<< " ==================================="<<endl;
+            cout<< " NOMBRE  : " << per.nombre << endl;
+            cout<< " APELLIDO: " << per.apellido << endl;
+            cout<< " CORREO  : " << per.email << endl;
+            cout<< " APODO   : " << per.alias << endl;
+
+            fseek(arch_tel, sizeof(telefono), SEEK_SET);
+            //fseek(arch_tel,-sizeof(tel),1);
+            while(fread(&tel, sizeof(telefono), 1, arch_tel))
             {
-                cout<< " ==================================="<<endl;
-                cout<< "           ID CONTACTO: "<< per.id_persona << endl;
-                cout<< " ==================================="<<endl;
-                cout<< " NOMBRE  : " << per.nombre << endl;
-                cout<< " APELLIDO: " << per.apellido << endl;
-                cout<< " CORREO  : " << per.email << endl;
-                cout<< " APODO   : " << per.alias << endl;
-
-                fseek(arch_tel, sizeof(telefono), SEEK_SET);
-                fseek(arch_tel,-sizeof(tel),1);
-
-                if(arch_tel != NULL)
+                if (tel.eliminado != false)
                 {
-                    while(fread(&tel, sizeof(telefono), 1, arch_tel))
+                    if(per.id_persona == tel.id_persona)
                     {
-                        if (tel.eliminado == false)
-                        {
-                            if(per.id_persona == tel.id_persona)
-                            {
-                                cout<< " -----------------------------------"<<endl;
-                                cout<< " ID TELEFONO: "<< tel.id_telefono << endl;
-                                cout<< " -----------------------------------"<<endl;
-                                cout<< " TELEFONO TIPO: " << tel.tipo << endl;
-                                cout<< " NUMERO       : " << tel.numero << endl;
-                            }
-                        }
-
+                        cout<< " -----------------------------------"<<endl;
+                        cout<< " ID TELEFONO: "<< tel.id_telefono << endl;
+                        cout<< " -----------------------------------"<<endl;
+                        cout<< " TELEFONO TIPO: " << tel.tipo << endl;
+                        cout<< " NUMERO       : " << tel.numero << endl;
                     }
-
                 }
-                cout<< " ==================================="<<endl<<endl;
-                cont ++;
+
             }
+            fclose(arch_tel);
+            cout<< " ==================================="<<endl<<endl;
+            cont ++;
         }
     }
-
-    fclose(arch_tel);
     fclose(arch_per);
 
     if(cont == 0)
-        cout<<"NO HAY CONTACTOS ELIMINADOS"<<endl;
+    {
+        cout<<"NO HAY CONTACTOS ELIMINADOS... PRESIONE UNA TECLA PARA CONTINUAR"<<endl;
+        cin.get();
+    }
     else
     {
         cout<<"INGRESE EL ID DEL CONTACTO A RECUPERAR"<<endl;
@@ -1305,9 +1442,7 @@ void mostrar_contactos_eliminados()
 
         recuperar_contacto(id_contacto);
     }
-
-
-    cin.get();
+    //cin.get();
 }
 
 ////===========================================================================

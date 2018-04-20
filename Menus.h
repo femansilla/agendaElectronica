@@ -154,7 +154,6 @@ void menu_mod()
     cout<< " INGRESE UNA OPCION: ";
 }
 
-
 ////===========================================================================
 //// FUNCION   : void menu_mod_datos().
 //// ACCION    : Muestra menu modificacion datos contacto.
@@ -198,6 +197,7 @@ void menu_mod_telefonos()
 //// PARAMETROS: NADA.
 //// DEVUELVE  : NADA.
 ////---------------------------------------------------------------------------
+
 void menu_switch_mod_telefono()
 {
     cout<< " =================================="<<endl;
@@ -334,7 +334,6 @@ bool sub_Menu_Buscar(int mod_bus)
                 encontro = false; // Si no encontro, no se puede modificar
 //                result= true;//Para salir del programa
                 salir=true;
-
             }break;
 
             default:
@@ -344,14 +343,11 @@ bool sub_Menu_Buscar(int mod_bus)
             }break;
         }
 
-
         if ( mod_bus == 1 || mod_bus == 3 )
         {
             if (encontro == true)
                 preguntar_id(mod_bus);
         }
-
-
     }
     return result;
 }
